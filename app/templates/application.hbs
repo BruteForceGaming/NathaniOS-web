@@ -1,5 +1,59 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <LinkTo @class="navbar-brand col-sm-3 col-md-2 mr-0" @route="index">
+    <strong>NathaniOS</strong>
+  </LinkTo>
+  <Search />
+  {{!--
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="#"></a>
+    </li>
+  </ul>
+  --}}
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          {{nav-item icon="info" label="About" href="about"}}
+          {{nav-item icon="mail" label="Contact" href="contact"}}
+        </ul>
 
-{{outlet}}
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Leaderboards</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          {{nav-item icon="activity" label="Top Active" href="top-active"}}
+          {{nav-item icon="trending-up" label="Top Rated" href="top-rated"}}
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Resources</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          {{nav-item icon="shield" label="Clans" href="clans"}}
+          {{nav-item icon="users" label="Profiles" href="profiles"}}
+          {{nav-item icon="server" label="Servers" href="servers"}}
+          {{nav-item icon="settings" label="System" href="metrics"}}
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Administration</span>
+          <a class="d-flex align-items-center text-muted" href="#">
+            {{fe-icon "key"}}
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              {{fe-icon "lock"}} Login First!
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    {{outlet}}
+  </div>
+</div>

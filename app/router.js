@@ -7,6 +7,15 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('index', {path: "/"})
+  this.route('about');
+  this.route('contact');
+  this.route('metrics');
+  this.route('profiles');
+  this.route('clans');
+  this.route('servers');
+  this.route('top-active');
+  this.route('top-rated');
 });
 
 export default Router;
