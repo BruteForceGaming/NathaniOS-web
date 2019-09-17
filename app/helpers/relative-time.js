@@ -12,13 +12,13 @@ export default helper(function relativeTime(params/*, hash*/) {
     var msDiff = futureDate - nowDate;
 
     if (msDiff < -MS_PER_DAY) {
-      return rtf.format(msDiff / MS_PER_DAY, 'day');
+      return rtf.format(Math.round(msDiff / MS_PER_DAY), 'day');
     } else if (msDiff < -MS_PER_HOUR) {
-      return rtf.format(msDiff / MS_PER_HOUR, 'hour');
+      return rtf.format(Math.round(msDiff / MS_PER_HOUR), 'hour');
     } else if (msDiff < -MS_PER_MINUTE) {
-      return rtf.format(msDiff / MS_PER_MINUTE, 'minute');
+      return rtf.format(Math.round(msDiff / MS_PER_MINUTE), 'minute');
     } else {
-      return rtf.format(msDiff / 1000, 'second');
+      return rtf.format(Math.round(msDiff / 1000), 'second');
     }
   }
 
