@@ -10,10 +10,9 @@ export default Component.extend({
   profilesSortProps: computed('sortProperty', function() {
     return [this.sortProperty];
   }),
-  sortedProfiles: sort('profiles', 'profilesSortProps'),
+  sortedProfiles: sort('model', 'profilesSortProps'),
 
   searchRegex: false,
-
   filteredProfiles: filter('sortedProfiles', ['sortedProfiles', 'Search.searchKeyword', 'searchRegex'], function(item) {
     let keyword = this.get('Search.searchKeyword');
 
@@ -22,12 +21,14 @@ export default Component.extend({
       var re = new RegExp(keyword, 'i');
       return keyword === "" ||
         re.test(item.Name) ||
+        re.test(item.FullID) ||
         re.test(item.Summary.ClanName);
     }
 
     /* regular fulltext search */
     return keyword === "" ||
       item.Name.includes(keyword) ||
+      item.FullID.includes(keyword) ||
       item.Summary.ClanName.includes(keyword);
   }),
 });

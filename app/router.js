@@ -11,7 +11,9 @@ Router.map(function() {
   this.route('about');
   this.route('contact');
   this.route('metrics');
-  this.route('profiles');
+  this.route('profiles', function() {
+    this.route('view', {path: ":profile_id"});
+  });
   this.route('clans');
   this.route('servers');
   this.route('top-active');

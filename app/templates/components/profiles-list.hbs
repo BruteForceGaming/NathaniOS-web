@@ -5,33 +5,49 @@
   <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>1v1 League</th>
-        <th>Team League</th>
-        <th>Season Games</th>
-        <th>Career Games</th>
+        <th title="ClanTag and Profile Name">Name</th>
+        <th title="Solo 1v1 Rating this Season">Solo</th>
+        <th title="Best Team Rating this Season">Best Team</th>
+        <th title="Games Played this Season">Season</th>
+        <th title="Games Played over Career">Career Games</th>
       </tr>
     </thead>
-    <tbody>
-      {{#each filteredProfiles as |p|}}
+    {{#each filteredProfiles as |p|}}
+      <tbody>
         <tr>
-          <td>{{p.Region}}-{{p.Summary.Realm}}-{{p.ProfileID}}</td>
-          <td>{{p.Name}}</td>
-          <td>
-            {{sc2-icon p.Career.Current1v1LeagueName}}
+          <td class="mock-title" title={{p.FullID}}>
+            {{#link-to "profiles.view" p}}{{p.Name}}{{/link-to}}
           </td>
-          <td>
-            {{sc2-icon p.Career.CurrentBestTeamLeagueName}}
+          <td title="NOT YET IMPLEMENTED">
+            {{#if (not-eq p.Career.Current1v1LeagueName "")}}
+              {{sc2-icon p.Career.Current1v1LeagueName}}
+              {{p.SoloMMR}}
+            {{else}}
+              <span class="text-secondary" title="Player has not placed this season">0</span>
+            {{/if}}
           </td>
-          <td>
-            {{p.SeasonRankedGames}} Ranked / {{p.SeasonGames}} Total
+          <td title="NOT YET IMPLEMENTED">
+            {{#if (not-eq p.Career.CurrentBestTeamLeagueName "")}}
+              {{sc2-icon p.Career.CurrentBestTeamLeagueName}}
+            {{else}}
+              <span class="text-secondary" title="Player has not placed this season">0</span>
+            {{/if}}
           </td>
-          <td>
-            {{p.CareerGames}}
+          <td>{{p.SeasonRankedGames}} Ranked / {{p.SeasonGames}} Total</td>
+          <td>{{p.CareerGames}}</td>
+        </tr>
+      </tbody>
+    {{else}}
+      <tfoot>
+        <tr>
+          <td colspan="5">
+            <strong>No Profiles matched your search term</strong>
+            <pre>{{Search.searchKeyword}}</pre>
           </td>
         </tr>
-      {{/each}}
-    </tbody>
+      </tfoot>
+    {{/each}}
   </table>
+
+  {{yield}}
 </div>

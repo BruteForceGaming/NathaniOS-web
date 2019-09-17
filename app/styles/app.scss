@@ -5,6 +5,19 @@ nav .ember-view {
   width: 100%;
 }
 
+.spinner-huge {
+  color: #999;
+  font-size: 2rem;
+  margin-top: 48px;
+  height: 12rem;
+  width: 12rem;
+}
+
+.mock-title a {
+  color: #003;
+  text-decoration: none;
+}
+
 /*
  * Dashboard Stylings
  */
@@ -110,13 +123,19 @@ icon svg {
   border-radius: 0;
 }
 
+.form-control-dark::placeholder {
+  color: #CCC;
+}
+
 .form-control-dark {
-  color: #fff;
-  background-color: rgba(255, 255, 255, .1);
-  border-color: rgba(255, 255, 255, .1);
+  color: #FFF;
+  background-color: rgba(255, 255, 255, .05);
+  border-color: rgba(255, 255, 255, .05);
 }
 
 .form-control-dark:focus {
+  color: #FFF;
   border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  background-color: rgba(200, 200, 200, .1);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .5);
 }

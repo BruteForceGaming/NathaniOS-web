@@ -5,33 +5,39 @@ import { computed } from '@ember/object';
 
 export default Model.extend({
   ProfileID: DS.attr('number'),
-  Region: DS.attr('string'),
-  FetchTimestamp: DS.attr('number'),
-  Snapshot: DS.attr(),
   Career: DS.attr(),
+  Region: DS.attr('string'),
+  Snapshot: DS.attr(),
   Summary: DS.attr(),
+  Timestamp: DS.attr('number'),
 
-  CareerGames: computed('Career', function() {
-    let career = this.get("Career")
-    return career.totalCareerGames;
+  SoloMMR: computed('Snapshot', function() {
+    let snapshot = this.get('Snapshot.SeasonSnapshot.1v1');
+    return "N/A";
   }),
 
-  SeasonRankedGames: computed('Snapshot', function() {
-    let snapshot = this.get("Snapshot")
-    return snapshot.totalRankedSeasonGamesPlayed;
+  FullID: computed('Summary', 'ProfileID', function() {
+    return `${this.get('Region')}-${this.get('Summary.Realm')}-${this.get('ProfileID')}`;
   }),
 
-  SeasonGames: computed('Career', function() {
-    let career = this.get("Career")
-    return career.totalGamesThisSeason;
+  CareerGames: computed('Career', function(){
+    return this.get('Career.totalCareerGames');
   }),
 
   Name: computed('Summary', function() {
     let str = "";
-    let sum = this.get("Summary")
-    if (sum.ClanTag !== "") {
-      str = `[${sum.ClanTag}] `
+    let summary = this.get('Summary');
+    if (summary.ClanTag !== '') {
+      str = `[${summary.ClanTag}] `;
     }
-    return `${str}${sum.displayName}`;
-  })
+    return `${str}${summary.displayName}`;
+  }),
+
+  SeasonGames: computed('Career', function() {
+    return this.get('Career.totalGamesThisSeason');
+  }),
+
+  SeasonRankedGames: computed('Snapshot.totalRankedSeasonGamesPlayed', function() {
+    return this.get('Snapshot.totalRankedSeasonGamesPlayed');
+  }),
 });
