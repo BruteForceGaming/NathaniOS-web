@@ -5,11 +5,11 @@ import { computed } from '@ember/object';
 
 export default Model.extend({
   ProfileID: DS.attr('number'),
-  Career: DS.attr(),
   Region: DS.attr('string'),
+  FetchTimestamp: DS.attr('number'),
+  Career: DS.attr(),
   Snapshot: DS.attr(),
   Summary: DS.attr(),
-  Timestamp: DS.attr('number'),
 
   SoloMMR: computed('Snapshot', function() {
     let snapshot = this.get('Snapshot.SeasonSnapshot.1v1');
