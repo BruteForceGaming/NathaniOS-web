@@ -1,0 +1,38 @@
+{{#if (not-eq @title "")}}
+  <h2 class="h3">{{@title}}</h2>
+{{/if}}
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Format</th>
+        <th>Avg. MMR</th>
+        <th># Members</th>
+      </tr>
+    </thead>
+    {{#each filteredLadders as |p|}}
+      <tbody>
+        <tr>
+          <td class="mock-title">
+            {{#link-to "ladders.view" p}}{{p.id}}{{/link-to}}
+          </td>
+          <td>{{p.Type}}</td>
+          <td>{{p.AverageMMR}}</td>
+          <td>{{p.MemberCount}}</td>
+        </tr>
+      </tbody>
+    {{else}}
+      <tfoot>
+        <tr>
+          <td colspan="5">
+            <strong>No Ladders matched your search term</strong>
+            <pre>{{Search.searchKeyword}}</pre>
+          </td>
+        </tr>
+      </tfoot>
+    {{/each}}
+  </table>
+
+  {{yield}}
+</div>

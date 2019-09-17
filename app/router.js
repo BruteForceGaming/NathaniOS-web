@@ -10,6 +10,9 @@ Router.map(function() {
   this.route('index', {path: "/"})
   this.route('about');
   this.route('contact');
+  this.route('ladders', function() {
+    this.route('view', {path: ":ladder_id"});
+  });
   this.route('metrics');
   this.route('profiles', function() {
     this.route('view', {path: ":profile_id"});
