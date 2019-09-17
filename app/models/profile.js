@@ -4,7 +4,6 @@ const { Model } = DS;
 import { computed } from '@ember/object';
 
 export default Model.extend({
-  ProfileID: DS.attr('number'),
   Region: DS.attr('string'),
   FetchTimestamp: DS.attr('number'),
   Career: DS.attr(),
@@ -16,8 +15,8 @@ export default Model.extend({
     return "N/A";
   }),
 
-  FullID: computed('Summary', 'ProfileID', function() {
-    return `${this.get('Region')}-${this.get('Summary.Realm')}-${this.get('ProfileID')}`;
+  FullID: computed('Summary', 'ID', function() {
+    return `${this.get('Region')}-${this.get('Summary.Realm')}-${this.get('id')}`;
   }),
 
   CareerGames: computed('Career', function(){
