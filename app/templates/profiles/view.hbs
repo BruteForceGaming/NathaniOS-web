@@ -10,6 +10,22 @@
     {{model.Summary}}
   </p>
 
+  <LaddersDetailedList
+    @model={{model.Ladders.Showcase}}
+    @sortProperty="leagueName"
+    @title="Showcase" />
+
+  {{#if model.Ladders.Placement}}
+    <h2 class="h3">Placement</h2>
+    {{model.Ladders.Placement}}
+    <br><br>
+  {{/if}}
+
+  <LaddersDetailedList
+    @model={{model.ResolvedMemberships}}
+    @sortProperty="leagueName"
+    @title="All Ladders" />
+
   <footer class="text-center text-secondary">
     Last Fetched: {{relative-time model.FetchTimestamp}}
   </footer>

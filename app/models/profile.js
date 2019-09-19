@@ -39,4 +39,8 @@ export default Model.extend({
   SeasonRankedGames: computed('Snapshot.totalRankedSeasonGamesPlayed', function() {
     return this.get('Snapshot.totalRankedSeasonGamesPlayed');
   }),
+
+  Ladders: computed('Summary', function() {
+    return this.store.find('ladder-summary', this.get('id'));
+  }),
 });
