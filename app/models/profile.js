@@ -1,46 +1,62 @@
 import DS from 'ember-data';
 const { Model } = DS;
 
+import LoadableModel from 'ember-data-storefront/mixins/loadable-model';
 import { computed } from '@ember/object';
 
-export default Model.extend({
-  Region: DS.attr('string'),
-  FetchTimestamp: DS.attr('number'),
-  Career: DS.attr(),
-  Snapshot: DS.attr(),
-  Summary: DS.attr(),
+export default Model.extend(LoadableModel, {
+  region: DS.attr('string'),
+  timestamp: DS.attr('number'),
+  career: DS.attr(),
+  snapshot: DS.attr(),
+  summary: DS.attr(),
 
-  SoloMMR: computed('Snapshot', function() {
-    let snapshot = this.get('Snapshot.SeasonSnapshot.1v1');
-    return "N/A";
+  ladderSummary: DS.belongsTo('ladder-summary'),
+
+  knownLadders: DS.attr('number'),
+
+  soloMMR: computed('snapshot', 'ladderSummary.isFulfilled', 'ladderSummary.ladders.isFulfilled', function() {
+    let mmr = 0;
+    let summary = this.get('ladderSummary');
+    if (summary.isFulfilled) {
+      let ladders = this.get('ladderSummary.ladders');
+      if (ladders.isFulfilled) {
+        let profile = this.get('id');
+        ladders.forEach(l => {
+          if (l.isFulfilled) {
+            if (l.teamMembers.length === 1) {
+              let team = myTeam(l, profile);
+              mmr = team.mmr
+            }
+          }
+        });
+      }
+    }
+    return mmr;
   }),
 
-  FullID: computed('Summary', 'ID', function() {
-    return `${this.get('Region')}-${this.get('Summary.Realm')}-${this.get('id')}`;
+  fullId: computed('summary', 'id', function() {
+    return `${this.get('region')}-${this.get('summary.Realm')}-${this.get('id')}`;
   }),
 
-  CareerGames: computed('Career', function(){
-    return this.get('Career.totalCareerGames');
+  careerGames: computed('career', function(){
+    return this.get('career.totalCareerGames');
   }),
 
-  Name: computed('Summary', function() {
+  name: computed('summary', function() {
     let str = "";
-    let summary = this.get('Summary');
+    let summary = this.get('summary');
     if (summary.ClanTag !== '') {
       str = `[${summary.ClanTag}] `;
     }
     return `${str}${summary.displayName}`;
   }),
 
-  SeasonGames: computed('Career', function() {
-    return this.get('Career.totalGamesThisSeason');
+  seasonGames: computed('career', function() {
+    return this.get('career.totalGamesThisSeason');
   }),
 
-  SeasonRankedGames: computed('Snapshot.totalRankedSeasonGamesPlayed', function() {
-    return this.get('Snapshot.totalRankedSeasonGamesPlayed');
-  }),
-
-  Ladders: computed('Summary', function() {
-    return this.store.find('ladder-summary', this.get('id'));
+  seasonRankedGames: computed('snapshot.totalRankedSeasonGamesPlayed', function() {
+    return this.get('snapshot.totalRankedSeasonGamesPlayed');
   }),
 });

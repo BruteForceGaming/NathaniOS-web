@@ -15,26 +15,26 @@
     {{#each filteredProfiles as |p|}}
       <tbody>
         <tr>
-          <td class="mock-title" title={{p.FullID}}>
-            {{#link-to "profiles.view" p}}{{p.Name}}{{/link-to}}
+          <td class="mock-title" title={{p.fullId}}>
+            {{#link-to "profiles.view" p}}{{p.name}}{{/link-to}}
           </td>
           <td title="NOT YET IMPLEMENTED">
-            {{#if (not-eq p.Career.Current1v1LeagueName "")}}
-              {{sc2-icon p.Career.Current1v1LeagueName}}
-              {{p.SoloMMR}}
+            {{#if (not-eq p.career.Current1v1LeagueName "")}}
+              {{sc2-icon p.career.Current1v1LeagueName}}
+              {{p.soloMMR}}
             {{else}}
               <span class="text-secondary" title="Player has not placed this season">0</span>
             {{/if}}
           </td>
           <td title="NOT YET IMPLEMENTED">
-            {{#if (not-eq p.Career.CurrentBestTeamLeagueName "")}}
-              {{sc2-icon p.Career.CurrentBestTeamLeagueName}}
+            {{#if (not-eq p.career.CurrentBestTeamLeagueName "")}}
+              {{sc2-icon p.career.CurrentBestTeamLeagueName}}
             {{else}}
               <span class="text-secondary" title="Player has not placed this season">0</span>
             {{/if}}
           </td>
-          <td>{{p.SeasonRankedGames}} Ranked / {{p.SeasonGames}} Total</td>
-          <td>{{p.CareerGames}}</td>
+          <td>{{p.seasonRankedGames}} Ranked / {{p.seasonGames}} Total</td>
+          <td>{{p.careerGames}}</td>
         </tr>
       </tbody>
     {{else}}
