@@ -12,8 +12,8 @@
         <th title="Games Played over Career">Career Games</th>
       </tr>
     </thead>
-    {{#each filteredProfiles as |p|}}
-      <tbody>
+    <tbody>
+      {{#each filteredProfiles as |p|}}
         <tr>
           <td class="mock-title" title={{p.fullId}}>
             {{#link-to "profiles.view" p}}{{p.name}}{{/link-to}}
@@ -21,7 +21,8 @@
           <td title="NOT YET IMPLEMENTED">
             {{#if (not-eq p.career.Current1v1LeagueName "")}}
               {{sc2-icon p.career.Current1v1LeagueName}}
-              {{p.soloMMR}}
+
+              <MmrForProfile @profile={{p}} />
             {{else}}
               <span class="text-secondary" title="Player has not placed this season">0</span>
             {{/if}}
@@ -36,17 +37,15 @@
           <td>{{p.seasonRankedGames}} Ranked / {{p.seasonGames}} Total</td>
           <td>{{p.careerGames}}</td>
         </tr>
-      </tbody>
-    {{else}}
-      <tfoot>
+      {{else}}
         <tr>
           <td colspan="5">
             <strong>No Profiles matched your search term</strong>
             <pre>{{Search.searchKeyword}}</pre>
           </td>
         </tr>
-      </tfoot>
-    {{/each}}
+      {{/each}}
+    </tbody>
   </table>
 
   {{yield}}

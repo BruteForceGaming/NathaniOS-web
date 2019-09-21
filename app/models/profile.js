@@ -15,26 +15,6 @@ export default Model.extend(LoadableModel, {
 
   knownLadders: DS.attr('number'),
 
-  soloMMR: computed('snapshot', 'ladderSummary.isFulfilled', 'ladderSummary.ladders.isFulfilled', function() {
-    let mmr = 0;
-    let summary = this.get('ladderSummary');
-    if (summary.isFulfilled) {
-      let ladders = this.get('ladderSummary.ladders');
-      if (ladders.isFulfilled) {
-        let profile = this.get('id');
-        ladders.forEach(l => {
-          if (l.isFulfilled) {
-            if (l.teamMembers.length === 1) {
-              let team = myTeam(l, profile);
-              mmr = team.mmr
-            }
-          }
-        });
-      }
-    }
-    return mmr;
-  }),
-
   fullId: computed('summary', 'id', function() {
     return `${this.get('region')}-${this.get('summary.Realm')}-${this.get('id')}`;
   }),
