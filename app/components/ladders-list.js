@@ -21,12 +21,12 @@ export default Component.extend({
       var re = new RegExp(keyword, 'i');
       return keyword === "" ||
         re.test(item.id) ||
-        re.test(item.Type);
+        re.test(item.format);
     }
 
     /* regular fulltext search */
     return keyword === "" ||
       item.id.includes(keyword) ||
-      item.Type.includes(keyword);
+      item.format.includes(keyword);
   }),
 });

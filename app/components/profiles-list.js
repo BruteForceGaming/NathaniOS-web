@@ -20,15 +20,15 @@ export default Component.extend({
     if (this.get('searchRegex') === true) {
       var re = new RegExp(keyword, 'i');
       return keyword === "" ||
-        re.test(item.Name) ||
-        re.test(item.FullID) ||
-        re.test(item.Summary.ClanName);
+        re.test(item.name) ||
+        re.test(item.fullId) ||
+        re.test(item.summary.ClanName);
     }
 
     /* regular fulltext search */
     return keyword === "" ||
-      item.Name.includes(keyword) ||
-      item.FullID.includes(keyword) ||
-      item.Summary.ClanName.includes(keyword);
+      item.name.includes(keyword) ||
+      item.fullId.includes(keyword) ||
+      item.summary.ClanName.includes(keyword);
   }),
 });
