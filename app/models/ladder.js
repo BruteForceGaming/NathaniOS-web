@@ -4,11 +4,11 @@ const { Model } = DS;
 import { computed } from '@ember/object';
 
 export default Model.extend({
-  FetchTimestamp: DS.attr('number'),
-  Teams: DS.attr(),
+  timestamp: DS.attr('number'),
+  teams: DS.attr(),
 
-  AverageMMR: computed('Teams', function() {
-    let teams = this.get("Teams");
+  averageMMR: computed('teams', function() {
+    let teams = this.get("teams");
     let count = teams.length;
     let total = 0;
 
@@ -23,13 +23,13 @@ export default Model.extend({
     return "N/A";
   }),
 
-  MemberCount: computed('Teams', function() {
-    let teams = this.get("Teams");
+  teamCount: computed('teams', function() {
+    let teams = this.get("teams");
     return teams.length;
   }),
 
-  Type: computed('Teams', function() {
-    let teams = this.get("Teams");
+  format: computed('teams', function() {
+    let teams = this.get("teams");
     if (teams === undefined ||
         teams.length == 0 ||
         teams[0].teamMembers === undefined) {

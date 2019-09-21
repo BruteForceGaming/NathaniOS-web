@@ -1,0 +1,64 @@
+{{#if (not-eq @title "")}}
+  <h2 class="h3">{{@title}}</h2>
+{{/if}}
+
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          ID
+        </th>
+        <th>
+          MMR
+        </th>
+        <th>
+          Wins
+        </th>
+        <th>
+          Losses
+        </th>
+        <th>
+          Players
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if model.isFulfilled}}
+        {{#each model as |ladder|}}
+          {{#with (my-team ladder.teams profile) as |myTeam|}}
+            <tr>
+              <td>
+                {{myTeam.rank}}
+              </td>
+              <td>
+                <button class="badge badge-secondary" {{action (transition-to "ladders.view" ladder.id) on=click}}>
+                  {{ladder.id}}
+                </button>
+              </td>
+              <td>
+                {{myTeam.mmr}}
+              </td>
+              <td>
+                {{myTeam.Wins}}
+              </td>
+              <td>
+                {{myTeam.Losses}}
+              </td>
+              <td>
+                {{#each myTeam.teamMembers as |member|}}
+                  <button class="badge badge-primary" {{action (transition-to "profiles.view" member.id) on=click}}>
+                    {{member.displayName}} ({{member.favoriteRace}})
+                  </button>
+                {{/each}}
+              </td>
+            </tr>
+          {{/with}}
+        {{/each}}
+      {{/if}}
+    </tbody>
+  </table>
+</div>

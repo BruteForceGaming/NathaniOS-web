@@ -17,9 +17,9 @@
           <td class="mock-title">
             {{#link-to "ladders.view" p}}{{p.id}}{{/link-to}}
           </td>
-          <td>{{p.Type}}</td>
-          <td>{{p.AverageMMR}}</td>
-          <td>{{p.MemberCount}}</td>
+          <td>{{p.format}}</td>
+          <td>{{p.averageMMR}}</td>
+          <td>{{p.teamCount}}</td>
         </tr>
       </tbody>
     {{else}}

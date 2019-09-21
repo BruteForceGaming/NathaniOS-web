@@ -32,7 +32,7 @@
             {{ladder.Rank}}
           </td>
           <td>
-            {{ladder.Team.localizedGameMode}} {{ladder.leagueName}}
+            {{ladder.team.localizedGameMode}} {{ladder.leagueName}}
           </td>
           <td>
             <button class="badge badge-secondary" {{action (transition-to "ladders.view" ladder.ladderId) on=click}}>
