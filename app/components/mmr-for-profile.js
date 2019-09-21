@@ -16,21 +16,21 @@ export default class MMRForProfile extends Component {
   @task(function*() {
     let { profile } = this.args;
 
-    let mmr = 0;
     let id = profile.id;
-
     let summary = yield profile.ladderSummary;
     let ladders = yield summary.ladders;
 
-    ladders.forEach(ladder => {
-      if (ladder.teamMembers.length === 1) {
-        let team = teamFor(ladder, profile);
+    let teams = ladders
+      .toArray()
+      .map(ladder => ladder.teams)
+      .flat();
 
-        mmr = team.mmr;
-      }
-    });
+    let myTeam = teams.find(team =>
+      team.teamMembers
+          .find(teamMember => teamMember.id === id)
+    );
 
-    return mmr;
+    return myTeam.mmr;
   })
   calculateMMR;
 }
