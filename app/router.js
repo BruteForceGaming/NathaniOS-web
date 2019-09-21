@@ -23,4 +23,3 @@ Router.map(function() {
   this.route('top-rated');
 });
 
-export default Router;
