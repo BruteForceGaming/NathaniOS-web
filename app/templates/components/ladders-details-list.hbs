@@ -35,9 +35,7 @@
                 {{myTeam.rank}}
               </td>
               <td>
-                <button class="badge badge-secondary" {{on "click" (transition-to "ladders.view" ladder.id)}}>
-                  {{ladder.id}}
-                </button>
+                {{#link-to "ladders.view" ladder.id}}{{ladder.id}}{{/link-to}}
               </td>
               <td>
                 {{myTeam.mmr}}
@@ -50,9 +48,9 @@
               </td>
               <td>
                 {{#each myTeam.teamMembers as |member|}}
-                  <button class="badge badge-primary" {{on "click" (transition-to "profiles.view" member.id)}}>
-                    {{member.displayName}} ({{member.favoriteRace}})
-                  </button>
+                  {{#link-to "profiles.view" member.playerId}}
+                    {{member.displayName}} <small>({{member.favoriteRace}})</small>
+                  {{/link-to}}
                 {{/each}}
               </td>
             </tr>

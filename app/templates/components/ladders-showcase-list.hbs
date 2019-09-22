@@ -35,9 +35,7 @@
             {{ladder.team.localizedGameMode}} {{ladder.leagueName}}
           </td>
           <td>
-            <button class="badge badge-secondary" {{on "click" (transition-to "ladders.view" ladder.ladderId)}}>
-              {{ladder.ladderId}}
-            </button>
+            {{#link-to "ladders.view" ladder.ladderId}}{{ladder.ladderId}}{{/link-to}}
           </td>
           <td>
             {{ladder.Wins}}
@@ -47,9 +45,9 @@
           </td>
           <td>
             {{#each ladder.Team.Members as |member|}}
-              <button class="badge badge-primary" {{on "click" (transition-to "profiles.view" member.playerId)}}>
-                {{member.Name}} ({{member.favoriteRace}})
-              </button>
+              {{#link-to "profiles.view" member.playerId}}
+                {{member.Name}} <small>({{member.favoriteRace}})</small>
+              {{/link-to}}
             {{/each}}
           </td>
         </tr>
