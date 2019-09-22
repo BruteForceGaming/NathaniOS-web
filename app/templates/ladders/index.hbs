@@ -2,10 +2,13 @@
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Ladders</h1>
   </div>
+
   <LaddersList
     @model={{this.model}}
     @searchKeyword={{this.searchKeyword}}
-    @sortProperty="averageMMR:desc"
-    @title="" />
+    @sortProperty="-averageMMR"
+    @title=""
+    />
+  
   {{outlet}}
 </main>
