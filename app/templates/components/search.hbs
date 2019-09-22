@@ -3,5 +3,6 @@
   class="form-control form-control-dark w-100"
   placeholder="Search"
   aria-label="Search"
-  value={{Search.searchKeyword}}
-  onkeyup={{action "updateSearch"}}>
+  value={{this.search.keyword}}
+  {{on "keyup" this.updateSearch}}
+>

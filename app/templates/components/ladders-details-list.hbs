@@ -27,15 +27,15 @@
       </tr>
     </thead>
     <tbody>
-      {{#if model.isFulfilled}}
-        {{#each model as |ladder|}}
-          {{#with (my-team ladder.teams profile) as |myTeam|}}
+      {{#if @model.isFulfilled}}
+        {{#each @model as |ladder|}}
+          {{#with (my-team ladder.teams @profile) as |myTeam|}}
             <tr>
               <td>
                 {{myTeam.rank}}
               </td>
               <td>
-                <button class="badge badge-secondary" {{action (transition-to "ladders.view" ladder.id) on=click}}>
+                <button class="badge badge-secondary" {{on "click" (transition-to "ladders.view" ladder.id)}}>
                   {{ladder.id}}
                 </button>
               </td>
@@ -50,7 +50,7 @@
               </td>
               <td>
                 {{#each myTeam.teamMembers as |member|}}
-                  <button class="badge badge-primary" {{action (transition-to "profiles.view" member.id) on=click}}>
+                  <button class="badge badge-primary" {{on "click" (transition-to "profiles.view" member.id)}}>
                     {{member.displayName}} ({{member.favoriteRace}})
                   </button>
                 {{/each}}

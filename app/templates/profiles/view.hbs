@@ -1,34 +1,36 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">{{model.name}}</h1>
-    <div class="h5">{{model.fullId}}</div>
+    <h1 class="h2">{{this.model.name}}</h1>
+    <div class="h5">{{this.model.fullId}}</div>
   </div>
 
   <p>
-    {{model.career}}
-    {{model.snapshot}}
-    {{model.summary}}
+    {{this.model.career}}
+    {{this.model.snapshot}}
+    {{this.model.summary}}
   </p>
 
   <LaddersShowcaseList
-    @model={{model.ladderSummary.showcase}}
+    @model={{this.model.ladderSummary.showcase}}
     @sortProperty="leagueName"
-    @title="Showcase" />
+    @title="Showcase"
+    />
 
-  {{#if model.ladderSummary.placement}}
+  {{#if this.model.ladderSummary.placement}}
     <h2 class="h3">Placement</h2>
-    {{model.ladderSummary.placement}}
+    {{this.model.ladderSummary.placement}}
     <br><br>
   {{/if}}
 
   <LaddersDetailsList
-    @model={{model.ladderSummary.ladders}}
+    @model={{this.model.ladderSummary.ladders}}
     @sortProperty="leagueName"
-    @profile={{model.id}}
-    @title="All Ladders" />
+    @profile={{this.model.id}}
+    @title="All Ladders"
+    />
 
   <footer class="text-center text-secondary">
-    Last Fetched: {{relative-time model.timestamp}}
+    Last Fetched: {{relative-time this.model.timestamp}}
   </footer>
 
   {{outlet}}

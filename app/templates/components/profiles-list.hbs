@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each filteredProfiles as |p|}}
+      {{#each this.filteredProfiles as |p|}}
         <tr>
           <td class="mock-title" title={{p.fullId}}>
             {{#link-to "profiles.view" p}}{{p.name}}{{/link-to}}

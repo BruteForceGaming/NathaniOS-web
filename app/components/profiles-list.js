@@ -1,34 +1,42 @@
-import Component from '@ember/component';
-
-import { computed } from '@ember/object';
-import { sort, filter } from '@ember/object/computed';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
+import { filter, sortBy } from 'lodash';
 
-export default Component.extend({
-  Search: service(),
+export default class ProfilesList extends Component {
+  @service
+  search;
 
-  profilesSortProps: computed('sortProperty', function() {
-    return [this.sortProperty];
-  }),
-  sortedProfiles: sort('model', 'profilesSortProps'),
+  get sortedProfiles() {
+    let sortProp = this.args.sortProperty;
 
-  searchRegex: false,
-  filteredProfiles: filter('sortedProfiles', ['sortedProfiles', 'Search.searchKeyword', 'searchRegex'], function(item) {
-    let keyword = this.get('Search.searchKeyword');
+    return sortBy(this.args.model.toArray(), [function(item) {
+      // handle descending sort
+      if (sortProp[0] === '-') {
+        return -item[sortProp.substr(1)];
+      }
 
-    /* regular expression search */
-    if (this.get('searchRegex') === true) {
-      var re = new RegExp(keyword, 'i');
+      return item[sortProp];
+    }]);
+  };
+
+  get filteredProfiles() {
+    let keyword = this.search.keyword;
+    let useRegex = this.search.useRegex;
+
+    return filter(this.sortedProfiles, function(item, idx, col) {
+      if (useRegex === true) {
+        var re = new RegExp(keyword, 'i');
+        return keyword === "" ||
+          re.test(item.name) ||
+          re.test(item.fullId) ||
+          re.test(item.summary.ClanName);
+      }
+
+      /* regular fulltext search */
       return keyword === "" ||
-        re.test(item.name) ||
-        re.test(item.fullId) ||
-        re.test(item.summary.ClanName);
-    }
-
-    /* regular fulltext search */
-    return keyword === "" ||
-      item.name.includes(keyword) ||
-      item.fullId.includes(keyword) ||
-      item.summary.ClanName.includes(keyword);
-  }),
-});
+        item.name.includes(keyword) ||
+        item.fullId.includes(keyword) ||
+        item.summary.ClanName.includes(keyword);
+    });
+  };
+};

@@ -1,8 +1,14 @@
 import Service from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
-export default Service.extend({
-  searchKeyword: "",
-  setSearchKeyword(keyword){
-    this.set('searchKeyword', keyword);
-  }
-});
+export default class Search extends Service {
+  @tracked
+  keyword = "";
+
+  @tracked
+  useRegex = false;
+
+  setKeyword(keyword) {
+    this.keyword = keyword;
+  };
+};
