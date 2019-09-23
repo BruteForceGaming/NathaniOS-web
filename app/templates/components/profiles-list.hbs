@@ -1,52 +1,83 @@
 {{#if (not-eq @title "")}}
-  <h2 class="h3">{{@title}}</h2>
+  <h2 class="h3">
+    {{@title}}
+  </h2>
 {{/if}}
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th title="ClanTag and Profile Name">Name</th>
-        <th title="Solo 1v1 Rating this Season">Solo</th>
-        <th title="Best Team Rating this Season">Best Team</th>
-        <th title="Games Played this Season">Season</th>
-        <th title="Games Played over Career">Career Games</th>
+        <th title="ClanTag and Profile Name">
+          Name
+        </th>
+        <th title="Solo 1v1 Rating this Season">
+          Solo
+        </th>
+        <th title="Best Team Rating this Season">
+          Best Team
+        </th>
+        <th title="Games Played this Season">
+          Season
+        </th>
+        <th title="Games Played over Career">
+          Career Games
+        </th>
       </tr>
     </thead>
     <tbody>
       {{#each this.filteredProfiles as |p|}}
         <tr>
           <td class="mock-title" title={{p.fullId}}>
-            {{#link-to "profiles.view" p}}{{p.name}}{{/link-to}}
+            <LinkTo @route="profiles.view" @model={{p}}>
+              {{p.name}}
+            </LinkTo>
           </td>
           <td title="NOT YET IMPLEMENTED">
             {{#if (not-eq p.career.Current1v1LeagueName "")}}
               {{sc2-icon p.career.Current1v1LeagueName}}
-
               <MmrForProfile @profile={{p}} />
             {{else}}
-              <span class="text-secondary" title="Player has not placed this season">0</span>
+              <span
+                class="text-secondary"
+                title="Player has not placed this season"
+              >
+                0
+              </span>
             {{/if}}
           </td>
           <td title="NOT YET IMPLEMENTED">
             {{#if (not-eq p.career.CurrentBestTeamLeagueName "")}}
               {{sc2-icon p.career.CurrentBestTeamLeagueName}}
             {{else}}
-              <span class="text-secondary" title="Player has not placed this season">0</span>
+              <span
+                class="text-secondary"
+                title="Player has not placed this season"
+              >
+                0
+              </span>
             {{/if}}
           </td>
-          <td>{{p.seasonRankedGames}} Ranked / {{p.seasonGames}} Total</td>
-          <td>{{p.careerGames}}</td>
+          <td>
+            {{p.seasonRankedGames}}
+            Ranked /
+            {{p.seasonGames}}
+            Total
+          </td>
+          <td>
+            {{p.careerGames}}
+          </td>
         </tr>
       {{else}}
         <tr>
           <td colspan="5">
-            <strong>No Profiles matched your search term</strong>
+            <strong>
+              No Profiles matched your search term
+            </strong>
             <pre>{{this.search.keyword}}</pre>
           </td>
         </tr>
       {{/each}}
     </tbody>
   </table>
-
   {{yield}}
 </div>

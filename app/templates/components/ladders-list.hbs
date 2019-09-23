@@ -1,38 +1,57 @@
 {{#if (not-eq @title "")}}
-  <h2 class="h3">{{@title}}</h2>
+  <h2 class="h3">
+    {{@title}}
+  </h2>
 {{/if}}
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th>id</th>
-        <th>Format</th>
-        <th>Avg. MMR</th>
-        <th># Members</th>
+        <th>
+          id
+        </th>
+        <th>
+          Format
+        </th>
+        <th>
+          Avg. MMR
+        </th>
+        <th>
+          # Members
+        </th>
       </tr>
     </thead>
     {{#each this.filteredLadders as |p|}}
       <tbody>
         <tr>
           <td class="mock-title">
-            {{#link-to "ladders.view" p}}{{p.id}}{{/link-to}}
+            <LinkTo @route="ladders.view" @model={{p}}>
+              {{p.id}}
+            </LinkTo>
           </td>
-          <td>{{p.format}}</td>
-          <td>{{p.averageMMR}}</td>
-          <td>{{p.teamCount}}</td>
+          <td>
+            {{p.format}}
+          </td>
+          <td>
+            {{p.averageMMR}}
+          </td>
+          <td>
+            {{p.teamCount}}
+          </td>
         </tr>
       </tbody>
     {{else}}
       <tfoot>
         <tr>
           <td colspan="5">
-            <strong>No Ladders matched your search term</strong>
+            <strong>
+              No Ladders matched your search term
+            </strong>
             <pre>{{this.search.keyword}}</pre>
           </td>
         </tr>
       </tfoot>
     {{/each}}
   </table>
-
   {{yield}}
 </div>

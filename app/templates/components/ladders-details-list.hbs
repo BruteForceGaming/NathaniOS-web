@@ -1,7 +1,8 @@
 {{#if (not-eq @title "")}}
-  <h2 class="h3">{{@title}}</h2>
+  <h2 class="h3">
+    {{@title}}
+  </h2>
 {{/if}}
-
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -35,7 +36,9 @@
                 {{myTeam.rank}}
               </td>
               <td>
-                {{#link-to "ladders.view" ladder.id}}{{ladder.id}}{{/link-to}}
+                <LinkTo @route="ladders.view" @model={{ladder.id}}>
+                  {{ladder.id}}
+                </LinkTo>
               </td>
               <td>
                 {{myTeam.mmr}}
@@ -48,9 +51,12 @@
               </td>
               <td>
                 {{#each myTeam.teamMembers as |member|}}
-                  {{#link-to "profiles.view" member.playerId}}
-                    {{member.displayName}} <small>({{member.favoriteRace}})</small>
-                  {{/link-to}}
+                  <LinkTo @route="profiles.view" @model={{member.playerId}}>
+                    {{member.displayName}}
+                    <small>
+                      ({{member.favoriteRace}})
+                    </small>
+                  </LinkTo>
                 {{/each}}
               </td>
             </tr>

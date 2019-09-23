@@ -1,7 +1,11 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">{{this.model.name}}</h1>
-    <div class="h5">{{this.model.fullId}}</div>
+    <h1 class="h2">
+      {{this.model.name}}
+    </h1>
+    <div class="h5">
+      {{this.model.fullId}}
+    </div>
   </div>
 
   <p>
@@ -14,12 +18,15 @@
     @model={{this.model.ladderSummary.showcase}}
     @sortProperty="leagueName"
     @title="Showcase"
-    />
+  />
 
   {{#if this.model.ladderSummary.placement}}
-    <h2 class="h3">Placement</h2>
+    <h2 class="h3">
+      Placement
+    </h2>
     {{this.model.ladderSummary.placement}}
-    <br><br>
+    <br>
+    <br>
   {{/if}}
 
   <LaddersDetailsList
@@ -27,11 +34,12 @@
     @sortProperty="leagueName"
     @profile={{this.model.id}}
     @title="All Ladders"
-    />
+  />
 
   <footer class="text-center text-secondary">
-    Last Fetched: {{relative-time this.model.timestamp}}
+    Last Fetched:
+    {{relative-time this.model.timestamp}}
   </footer>
-
+  
   {{outlet}}
 </main>
