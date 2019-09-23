@@ -1,9 +1,10 @@
 import DS from 'ember-data';
 const { Model } = DS;
 
+import LoadableModel from 'ember-data-storefront/mixins/loadable-model';
 import { computed } from '@ember/object';
 
-export default Model.extend({
+export default Model.extend(LoadableModel, {
   timestamp: DS.attr('number'),
   teams: DS.attr(),
 
