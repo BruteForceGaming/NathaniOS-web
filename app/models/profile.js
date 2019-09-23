@@ -13,8 +13,6 @@ export default Model.extend(LoadableModel, {
 
   ladderSummary: DS.belongsTo('ladder-summary'),
 
-  knownLadders: DS.attr('number'),
-
   fullId: computed('summary', 'id', function() {
     return `${this.get('region')}-${this.get('summary.Realm')}-${this.get('id')}`;
   }),
